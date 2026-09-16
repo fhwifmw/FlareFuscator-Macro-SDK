@@ -1,0 +1,35 @@
+{
+  "schemaVersion": 2,
+  "architecture": "V3",
+  "canonicalPrefix": "FF_",
+  "globalPresets": false,
+  "macros": [
+    {"name":"FF_OBFUSCATED","kind":"scalar","dev":"false"},
+    {"name":"FF_LINE","kind":"scalar","dev":"-1"},
+    {"name":"FF_CRASH","kind":"call","dev":"terminal error"},
+    {"name":"FF_ASSERT","kind":"call","dev":"runtime assertion"},
+    {"name":"FF_NO_UPVALUES","kind":"function-wrapper","dev":"identity; compiler validates captures"},
+    {"name":"FF_DEV_ONLY","kind":"function-wrapper","dev":"identity"},
+    {"name":"FF_ENC","kind":"value-or-function","dev":"identity with validation"},
+    {"name":"FF_SECURE","kind":"function-wrapper","dev":"identity with validation"},
+    {"name":"FF_LIGHT","kind":"function-wrapper","dev":"identity with validation"},
+    {"name":"FF_NOVM","kind":"function-wrapper","dev":"identity with validation"},
+    {"name":"FF_BIND","kind":"value-or-function","dev":"identity after runtime/expected equality check"},
+    {"name":"FF_EPHEMERAL","aliases":["FF_EPH"],"kind":"value-or-function","dev":"best-effort one-call function wrapper; primitive identity; compiler owns global source-site enforcement"},
+    {"name":"FF_MACRO","kind":"area-open","tiers":["lite","bal","high"],"dev":"no-op marker"},
+    {"name":"FF_END","kind":"area-close","dev":"no-op marker"}
+  ],
+  "sourceDirectives": ["--!flare keep-next", "--!flare strip-next"],
+  "legacyAliases": {
+    "FLARE_ENCSTR":"FF_ENC",
+    "FLARE_STRENC":"FF_ENC",
+    "FLARE_ENCNUM":"FF_ENC",
+    "FLARE_NUMENC":"FF_ENC",
+    "FLARE_PROTECT":"FF_ENC",
+    "FLARE_ENCFUNC":"FF_ENC",
+    "FLARE_FUNCENC":"FF_ENC",
+    "FLARE_SENSITIVE":"FF_SECURE",
+    "FLARE_NO_VM":"FF_NOVM",
+    "FLARE_NO_VIRTUALIZE":"FF_NOVM"
+  }
+}
