@@ -1,5 +1,5 @@
 --!strict
--- Flare Macro SDK global declarations for FlareFuscator V3.
+-- Flare Macro SDK global declarations
 
 export type FlareFunction = (...any) -> ...any
 export type FlareMacroTier = "lite" | "bal" | "high"
@@ -38,7 +38,7 @@ declare high: FlareMacroTier
 declare function FF_MACRO(tier: FlareMacroTier): ()
 declare function FF_END(): ()
 
--- Legacy compatibility aliases -------------------------------------------------
+-- Legacy compatibility aliases
 declare FLARE_OBFUSCATED: boolean
 declare FLARE_LINE: number
 declare FLARE_CRASH: typeof(FF_CRASH)
