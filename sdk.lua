@@ -1,9 +1,3 @@
--- Flare Macro SDK
--- Development-time compatibility shims for FlareFuscator V3 macros.
---
--- This file preserves plain-source development behavior. It does not emulate
--- FlareFuscator's VM, encryption, protected constant storage, or planner.
-
 if not FF_OBFUSCATED then
     FF_OBFUSCATED = false
     FF_LINE = -1
@@ -120,14 +114,9 @@ if not FF_OBFUSCATED then
         end
 
         if type(value) ~= "function" then
-            -- Primitive values remain real primitives in development. The V3
-            -- compiler/runtime enforces global source-site single-consumption.
             return value
         end
 
-        -- Best-effort development approximation. Production V3 semantics are
-        -- stronger: consumption is GLOBAL PER PROTECTED SOURCE SITE, including
-        -- separately-created closures from the same FF_EPH site.
         local consumed = false
         return function(...)
             if consumed then
@@ -140,9 +129,6 @@ if not FF_OBFUSCATED then
 
     FF_EPH = FF_EPHEMERAL
 
-    -- FF_MACRO is the only arbitrary area macro. In plain development these
-    -- markers are no-ops, so everything between them remains ordinary Luau in
-    -- the exact same lexical scope.
     function FF_MACRO(tier, ...)
         if select("#", ...) ~= 0 then
             macroError("FF_MACRO:E_ARG_COUNT", "expected FF_MACRO(lite|bal|high).", 2)
@@ -158,7 +144,7 @@ if not FF_OBFUSCATED then
         end
     end
 
-    -- Compatibility aliases retained for older source. Canonical V3 names are FF_*.
+    -- Compatibility aliases
     FLARE_OBFUSCATED = FF_OBFUSCATED
     FLARE_LINE = FF_LINE
     FLARE_CRASH = FF_CRASH
