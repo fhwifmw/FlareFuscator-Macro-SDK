@@ -1,26 +1,17 @@
 # Flare Macro SDK
 
-Development-time compatibility shims and Luau declarations for **FlareFuscator V3** macros.
+Development-time compatibility shims and Luau declarations for **FlareFuscator** macros.
 
-FlareFuscator has one current architecture: **V3**. There are no public Lite/Balanced/Maximum compiler presets. The names `lite`, `bal`, and `high` exist only as local `FF_MACRO` policy tiers.
+Current FlareFuscator version: **V3**. 
 
 The SDK preserves normal unobfuscated execution. It does **not** emulate FlareFuscator's encryption, virtualization, protected VM state, or automatic macro planner.
-
-## Files
-
-- `sdk.lua` — runtime development shims and argument validation.
-- `types.d.luau` — global Luau declarations for autocomplete/type checking.
-- `macros.json` — machine-readable public macro surface.
-- `examples/` — usage examples.
-
-No JavaScript preprocessor is required.
 
 ## Usage
 
 Load the SDK before the rest of your unobfuscated script:
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/FlareKey/macrosdk/main/sdk.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/fhwifmw/FlareFuscator-Macro-SDK/refs/heads/main/sdk.lua"))()
 ```
 
 Then use the macros normally.
@@ -164,30 +155,6 @@ Development behavior:
 
 Source directives such as `--!flare keep-next` and `--!flare strip-next` are compiler directives and need no runtime shim.
 
-## Legacy compatibility
-
-The SDK keeps selected `FLARE_*` aliases for older source compatibility, but canonical V3 code uses `FF_*`.
-
-Examples include:
-
-- `FLARE_ENCSTR` / `FLARE_ENCNUM` / `FLARE_PROTECT` / `FLARE_ENCFUNC` → `FF_ENC`
-- `FLARE_SENSITIVE` → `FF_SECURE`
-- `FLARE_NO_VM` / `FLARE_NO_VIRTUALIZE` → `FF_NOVM`
-
-Legacy aliases do not imply a legacy V2 runtime architecture.
-
 ## Type declarations
 
-`types.d.luau` declares the global macro surface for Luau-aware tooling. Register it using the mechanism supported by your editor/typechecker.
-
-## Testing
-
-The repo includes a lightweight static consistency check:
-
-```bash
-python3 tests/static.py
-```
-
-## Scope
-
-This repository defines the **public development contract** for FlareFuscator V3 macros. Production behavior is authoritative in FlareFuscator itself.
+`types.d.luau` declares the global macro surface for Luau-aware tooling. Register it using the mechanism supported by your autocomplete.
